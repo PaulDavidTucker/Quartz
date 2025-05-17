@@ -28,7 +28,9 @@ jobs:
       - name: Ensure submodule is at latest commit
         run: |
           cd content
-          git pull origin $(git rev-parse --abbrev-ref HEAD) # Pull latest from its current branch
+          git fetch origin
+          git checkout $(git rev-parse --abbrev-ref HEAD)
+          git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
           cd ..
 
       - name: Setup Node.js
