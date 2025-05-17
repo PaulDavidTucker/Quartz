@@ -21,12 +21,15 @@ jobs:
       - name: Checkout main repository
         uses: actions/checkout@v4 
         with:
-
           token: ${{ secrets.QUARTZ_REPO_TOKEN }}
+          submodules: 'recursive'
+          persist-credentials: true
           
-      - name: Update Content Submodule
+      - name: Ensure submodule is at latest commit
         run: |
-          git submodule update --init --remote --recursive
+          cd content
+          git pull origin $(git rev-parse --abbrev-ref HEAD) # Pull latest from its current branch
+          cd ..
 
       - name: Setup Node.js
         uses: actions/setup-node@v4 # Or a newer version
