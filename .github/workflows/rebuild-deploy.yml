@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout main repository
-        uses: actions/checkout@v4 
+        uses: actions/checkout@v5 
         with:
           token: ${{ secrets.QUARTZ_REPO_TOKEN }}
           submodules: 'recursive'
@@ -46,7 +46,7 @@ jobs:
         run: npx quartz build 
 
       - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v3 # Or a newer version
+        uses: actions/upload-pages-artifact@v4 # Or a newer version
         with:
           path: ./public
       
